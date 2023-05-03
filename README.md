@@ -1,6 +1,6 @@
 # Exporting images from Processing
 
-This tutorial shows how to export images from Processing sketches with resolution higher than the window size.
+This tutorial shows how to export images from Processing sketches. Some of these methods allow the export of images with resolution higher than the window size.
 
 (More details to be added later)
 
