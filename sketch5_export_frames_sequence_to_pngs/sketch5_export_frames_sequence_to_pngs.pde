@@ -1,7 +1,7 @@
 import java.nio.file.Paths;
 
 Meteor[] meteors = new Meteor[50];
-boolean exporting = false;
+boolean export = false;
 String outputFolder;
 
 void setup() {
@@ -19,33 +19,25 @@ void draw() {
     meteors[i].display(getGraphics());
   }
   
-  fill(50);
-  textSize(16);
-  text(frameCount + " / " + round(frameRate), 10, 20);
-  
-  if (exporting) {
-    PGraphics outputCanvas = createGraphics(1080, 1080);
-    outputCanvas.beginDraw();
-    outputCanvas.background(200); // comment this line to save a PNG image with transparent background
-    outputCanvas.scale(outputCanvas.height / (float) height);
-    for (int i = 0; i < meteors.length; i++) {
-      meteors[i].display(outputCanvas);
-    }
-    outputCanvas.endDraw();
+  if (export) {
     String outputPath = Paths.get(outputFolder, "frame_" + nf(frameCount, 8)).toString();
-    outputCanvas.save(outputPath + ".png");
+    save(outputPath + ".png");
     println("Frame " + frameCount + " saved to: " + outputPath);
     
     noStroke();
     fill(255, 0, 0);
     circle(width - 20, 20, 20);
   }
+  
+  fill(50);
+  textSize(16);
+  text(frameCount + " / " + round(frameRate), 10, 20);
 }
 
 void keyReleased() {
   if (key == 'e') {
-    exporting = !exporting;
-    if (exporting) {
+    export = !export;
+    if (export) {
       setOutputFolder();
     }
   } else {
